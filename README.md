@@ -33,7 +33,7 @@ Ubuntu Server (node01)
 
 - Ubuntu Server
 - Linux / Bash
-- SSH
+- SSH with Ed25519 key authentication
 - Wake-on-LAN
 - Nginx
 - Docker
@@ -117,7 +117,6 @@ remotely before connecting over SSH.
 
 Planned extensions to the lab include:
 
-- SSH key authentication
 - Tailscale remote access
 - Ansible configuration management
 - Infrastructure as Code with Terraform
