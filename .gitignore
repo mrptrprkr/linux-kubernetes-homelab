@@ -1,0 +1,35 @@
+# Secrets and credentials
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+.env
+.env.*
+*secret*
+*credentials*
+
+# Kubernetes credentials
+kubeconfig
+*.kubeconfig
+
+# Terraform generated/sensitive files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Ansible sensitive files
+*vault*
+*.retry
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
