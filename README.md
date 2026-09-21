@@ -27,6 +27,8 @@ Ubuntu Server (node01)
             +-- Nginx Pod
             +-- ConfigMap
             +-- NodePort Service
+```
+
 ## Technologies
 
 - Ubuntu Server
