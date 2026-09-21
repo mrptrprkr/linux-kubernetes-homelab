@@ -11,22 +11,21 @@ administered remotely from a Windows workstation.
 ```text
 Windows ThinkPad
       |
-      | SSH / Wake-on-LAN
+      +-- Local network --> SSH / Wake-on-LAN
       |
-Home Network
-      |
-      | Ethernet
-      |
-Ubuntu Server (node01)
-      |
-      +-- Nginx
-      +-- Docker
-      +-- K3s
-            |
-            +-- Kubernetes Deployment
-            +-- Nginx Pod
-            +-- ConfigMap
-            +-- NodePort Service
+      +-- Remote network --> Tailscale --> SSH
+                                      |
+                                      v
+                             Ubuntu Server (node01)
+                                      |
+                                      +-- Nginx
+                                      +-- Docker
+                                      +-- K3s
+                                            |
+                                            +-- Kubernetes Deployment
+                                            +-- Nginx Pod
+                                            +-- ConfigMap
+                                            +-- NodePort Service
 ```
 
 ## Technologies
@@ -34,11 +33,31 @@ Ubuntu Server (node01)
 - Ubuntu Server
 - Linux / Bash
 - SSH with Ed25519 key authentication
+- Tailscale
 - Wake-on-LAN
 - Nginx
 - Docker
 - K3s / Kubernetes
+- UFW
 - Git
+
+## Secure Remote Access
+
+The server can be administered securely from outside the home network
+using Tailscale.
+
+Tailscale provides encrypted private connectivity between the Windows
+administration workstation and the Ubuntu server without exposing SSH
+through router port forwarding.
+
+Remote access was tested from an external mobile network to verify that
+the server remained reachable outside the local network. During testing,
+Tailscale successfully provided connectivity through a DERP relay when
+a direct peer-to-peer connection could not be established.
+
+OpenSSH is configured to use Ed25519 public-key authentication, with
+password authentication disabled. UFW is enabled with a default-deny
+policy for incoming traffic.
 
 ## Kubernetes Application
 
@@ -117,7 +136,6 @@ remotely before connecting over SSH.
 
 Planned extensions to the lab include:
 
-- Tailscale remote access
 - Ansible configuration management
 - Infrastructure as Code with Terraform
 - Additional Kubernetes workloads
